@@ -1,5 +1,6 @@
-streamlit>=1.31.0
-playwright>=1.41.0
-google-genai>=0.8.0
-Pillow>=10.0.0
-python-dotenv>=1.0.0
+streamlit
+google-genai
+playwright
+pytest-playwright
+pillow
+python-dotenv
