@@ -1,1 +1,2 @@
-touch postBuild
+#!/usr/bin/env bash
+playwright install chromium
