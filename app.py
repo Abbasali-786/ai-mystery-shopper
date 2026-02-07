@@ -489,43 +489,13 @@ st.markdown("""
 <div class="hero">
     <h1>🔍 AI Mystery Shopper</h1>
     <p>Advanced Website UX Analysis & Conversion Optimization</p>
-    <p class="subtitle">Powered by Google Gemini AI • Real User Simulation • Actionable Insights</p>
+    <p class="subtitle">Real User Simulation • AI-Powered Analysis • Actionable Insights</p>
 </div>
 """, unsafe_allow_html=True)
 
 # Sidebar Configuration
 with st.sidebar:
     st.markdown("## ⚙️ Configuration")
-    st.markdown("---")
-    
-    # API Key Section
-    st.markdown("### 🔑 API Settings")
-    
-    default_api = os.getenv("GEMINI_API_KEY", "AIzaSyD3nLbORp57TSjWh_wiMW-WRCtW0p1FWWs")
-    api_key = st.text_input(
-        "Google Gemini API Key",
-        type="password",
-        value=default_api,
-        placeholder="Enter your API key...",
-        help="Get free API key from https://aistudio.google.com/app/apikey"
-    )
-    
-    # API Status Indicator
-    if api_key:
-        st.markdown("""
-        <div class="status-success">
-            <strong>✅ API Key Active</strong><br>
-            <small>Ready to analyze</small>
-        </div>
-        """, unsafe_allow_html=True)
-    else:
-        st.markdown("""
-        <div class="status-warning">
-            <strong>⚠️ API Key Required</strong><br>
-            <small><a href="https://aistudio.google.com/app/apikey" target="_blank" style="color: #ed8936; font-weight: 600;">Get Free Key →</a></small>
-        </div>
-        """, unsafe_allow_html=True)
-    
     st.markdown("---")
     
     # Website Settings
@@ -573,25 +543,49 @@ with st.sidebar:
     # Quick Guide
     with st.expander("📚 Quick Guide"):
         st.markdown("""
-        1. Enter API key
-        2. Set target URL
-        3. Define goal
-        4. Click Start
-        5. Review results
-        6. Download report
+        1. Set target URL
+        2. Define goal
+        3. Click Start
+        4. Review results
+        5. Download report
         
         **Tip:** Use specific goals for best results
         """)
     
+    st.markdown("---")
+    
+    # Team Info
+    st.markdown("### 👥 About Team")
     st.markdown("""
-    <div style='text-align: center; padding: 1.5rem; color: #a0aec0; font-size: 0.85rem; margin-top: 2rem;'>
-        <strong>Made with ❤️</strong><br>
-        Powered by Gemini AI
+    <div class="status-info">
+        <strong>Team Code_Cracker</strong><br>
+        <small style="line-height: 1.6;">
+        Showcasing dedication and strong collaborative spirit through innovative solutions. 
+        Building impactful tools that analyze, innovate, and solve real-world problems.
+        </small>
     </div>
     """, unsafe_allow_html=True)
 
 # Main Control Panel
 st.markdown("## 🎮 Control Panel")
+
+# Auto-load API key from environment
+api_key = os.getenv("GEMINI_API_KEY", "AIzaSyD3nLbORp57TSjWh_wiMW-WRCtW0p1FWWs")
+
+# Show warning if no API key in environment
+if not api_key:
+    st.markdown("""
+    <div class="status-warning">
+        <h4>⚠️ Configuration Required</h4>
+        <p>Please set your Gemini API key in the <code>.env</code> file:</p>
+        <ol style="margin: 0.5rem 0;">
+            <li>Create a file named <code>.env</code> in the project folder</li>
+            <li>Add this line: <code>GEMINI_API_KEY=your_api_key_here</code></li>
+            <li>Get your free key from <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color: #ed8936; font-weight: 600;">Google AI Studio</a></li>
+            <li>Restart the application</li>
+        </ol>
+    </div>
+    """, unsafe_allow_html=True)
 
 col1, col2, col3 = st.columns([2, 1, 1])
 
@@ -611,28 +605,12 @@ with col2:
 with col3:
     help_btn = st.button("❓ Help", use_container_width=True)
     if help_btn:
-        st.info("Enter API key → Set URL → Click Start → View Results")
+        st.info("Set URL → Define Goal → Click Start → View Results")
 
 st.markdown("---")
 
 # Progress Section
-if not api_key:
-    st.markdown("""
-    <div class="status-warning">
-        <h3>⚠️ API Key Required</h3>
-        <p>Enter your Google Gemini API key in the sidebar to begin.</p>
-        <p><strong>Get your free key:</strong></p>
-        <ol>
-            <li>Visit <a href="https://aistudio.google.com/app/apikey" target="_blank">Google AI Studio</a></li>
-            <li>Click "Create API Key"</li>
-            <li>Copy and paste in sidebar</li>
-        </ol>
-        <p style="font-size: 0.9rem; color: #718096; margin-top: 1rem;">
-            💡 Free tier includes generous quotas
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-else:
+if api_key:
     progress_bar = st.progress(0)
     status_text = st.empty()
 
@@ -862,14 +840,8 @@ Avg Score: {sum([r['ux_analysis'].get('conversion_score', 0) for r in results]) 
 # Footer
 st.markdown("""
 <div class="custom-footer">
-    <p style="font-size: 1.2rem; font-weight: 600; color: #667eea;">
-        🔍 AI Mystery Shopper Pro
-    </p>
-    <p style="margin: 0.5rem 0;">
-        Advanced UX Analysis Platform
-    </p>
-    <p style="font-size: 0.9rem; color: #a0aec0;">
-        Powered by Google Gemini AI • v1.0
+    <p style="font-size: 0.9rem; color: #a0aec0; text-align: center; margin-top: 1.5rem;">
+        Built with ❤️ by Team Code_Cracker
     </p>
 </div>
 """, unsafe_allow_html=True)
