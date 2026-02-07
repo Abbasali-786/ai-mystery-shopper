@@ -24,4 +24,4 @@ libjbig0
 libwebp7
 libtiff6
 libopus0
-libvpx9
+ffmpeg
