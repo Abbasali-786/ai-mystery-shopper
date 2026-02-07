@@ -570,7 +570,7 @@ with st.sidebar:
 st.markdown("## 🎮 Control Panel")
 
 # Auto-load API key from environment
-api_key = os.getenv("GEMINI_API_KEY", "AIzaSyD3nLbORp57TSjWh_wiMW-WRCtW0p1FWWs")
+api_key = os.getenv("GEMINI_API_KEY", "")
 
 # Show warning if no API key in environment
 if not api_key:
